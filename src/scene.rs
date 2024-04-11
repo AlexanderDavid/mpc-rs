@@ -1,27 +1,36 @@
 use std::{
     fs::{File, OpenOptions},
     io::{Read, Write},
+    time::Duration,
 };
 
 use serde::{Deserialize, Serialize};
 
+use dipstick::*;
+
 use crate::agent::Agent;
-use crate::diff_drive::DiffDriveAgent;
+// use crate::diff_drive::DiffDriveAgent;
 use crate::accel_diff_drive::AccelDiffDriveAgent;
 
 #[derive(Serialize, Deserialize)]
 pub struct Scene {
-    pub agents: Vec<AccelDiffDriveAgent>,
+    agents: Vec<AccelDiffDriveAgent>,
 }
 
 impl Scene {
     const DT: f64 = 0.01 as f64;
     const GOAL_EPS: f64 = 0.1 as f64;
+    const CONTROL_SAMPLES: i32 = 10_000 as i32;
+    const ROLLOUT_ITERS: i32 = 10 as i32;
 
     pub fn run_once(&mut self) {
-        self.agents
-            .iter_mut()
-            .for_each(|x| x.take(&x.get_next_best_action(100, 10, Self::DT).0, Self::DT));
+        self.agents.iter_mut().for_each(|x| {
+            x.take(
+                &x.get_next_best_action(Self::CONTROL_SAMPLES, Self::ROLLOUT_ITERS, Self::DT)
+                    .0,
+                Self::DT,
+            )
+        });
     }
 
     pub fn done(&self) -> bool {
