@@ -40,7 +40,6 @@ pub trait Agent<State, Action: std::fmt::Display> {
             }
         }
 
-        println!("action: {}", curr_best_action);
         (curr_best_action, curr_best_cost)
     }
 

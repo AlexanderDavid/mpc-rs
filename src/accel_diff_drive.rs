@@ -47,8 +47,6 @@ impl Agent<Vector5<f64>, Vector2<f64>> for AccelDiffDriveAgent {
 
         self.state[3] = nalgebra::clamp(self.state[3], Self::STATE_LB[3], Self::STATE_UB[3]);
         self.state[3] = nalgebra::clamp(self.state[3], Self::STATE_LB[3], Self::STATE_UB[3]);
-
-        println!("state: {}", self.state);
     }
 
     fn get_goal_pose(&self) -> Vector3<f64> {
