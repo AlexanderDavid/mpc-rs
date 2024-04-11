@@ -52,7 +52,7 @@ impl Scene {
             .open(&format!("{}", filename))
         {
             Ok(file) => file,
-            Err(err) => {
+            Err(_) => {
                 return false;
             }
         };
