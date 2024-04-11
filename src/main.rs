@@ -2,6 +2,8 @@ use crate::scene::Scene;
 
 mod scene;
 mod agent;
+mod diff_drive;
+mod accel_diff_drive;
 
 fn main() {
     let filename: String = "scenes/simple.toml".to_string();

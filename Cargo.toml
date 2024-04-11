@@ -11,6 +11,3 @@ rand = "*" # replace * by the latest version of the crate.
 toml = "*"
 serde = "*"
 serde_derive = "*"
-
-[features]
-serde-serialize = []

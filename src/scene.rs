@@ -5,16 +5,18 @@ use std::{
 
 use serde::{Deserialize, Serialize};
 
-use crate::agent::{Agent, DiffDriveAgent};
+use crate::agent::Agent;
+use crate::diff_drive::DiffDriveAgent;
+use crate::accel_diff_drive::AccelDiffDriveAgent;
 
 #[derive(Serialize, Deserialize)]
 pub struct Scene {
-    pub agents: Vec<DiffDriveAgent>,
+    pub agents: Vec<AccelDiffDriveAgent>,
 }
 
 impl Scene {
     const DT: f64 = 0.01 as f64;
-    const GOAL_EPS: f64 = 0.01 as f64;
+    const GOAL_EPS: f64 = 0.1 as f64;
 
     pub fn run_once(&mut self) {
         self.agents
