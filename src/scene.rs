@@ -5,7 +5,7 @@ use std::{
 
 use serde::{Deserialize, Serialize};
 
-use crate::agent::DiffDriveAgent;
+use crate::agent::{Agent, DiffDriveAgent};
 
 #[derive(Serialize, Deserialize)]
 pub struct Scene {
