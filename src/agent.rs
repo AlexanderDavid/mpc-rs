@@ -9,7 +9,7 @@ pub struct DiffDriveAgent {
     state: Vector3<f64>, // x, y, theta
     goal: Vector3<f64>, // x, y, theta
 
-    history: Vec<Vector3<f64>>
+    history: Vec<(Vector3<f64>, Vector2<f64>)>
 }
 
 impl DiffDriveAgent {
@@ -69,7 +69,7 @@ impl DiffDriveAgent {
     }
 
     pub fn take(&mut self, action: &Vector2<f64>, dt: f64) {
-        self.history.push(self.state);
+        self.history.push((self.state, *action));
 
         self.state[0] += action[0] * f64::cos(action[1]) * dt;
         self.state[1] += action[0] * f64::sin(action[1]) * dt;
