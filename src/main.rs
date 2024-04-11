@@ -1,25 +1,19 @@
-use nalgebra::Vector3;
+use crate::scene::Scene;
 
+mod scene;
 mod agent;
 
 fn main() {
-    static DT: f64 = 0.01 as f64;
-    static GOAL_EPS: f64 = 0.01 as f64;
+    let mut scene = match Scene::load(&"scenes/simple.toml".to_string()) {
+        Some(s) => s,
+        None => panic!()
+    };
 
-    let mut agents = Vec::new();
-    let state = Vector3::<f64>::new(0.0, 0.0, 0.0);
-    let goal = Vector3::<f64>::new(1.0, 0.0, 0.0);
-    let agent = agent::DiffDriveAgent::new(state, goal);
-    agents.push(agent);
+    scene.run();
 
-    while !agents
-        .iter()
-        .fold(false, |acc, x| acc || x.at_goal(GOAL_EPS))
-    {
-        println!("step: {}", agents[0]);
-        agents
-            .iter_mut()
-            .for_each(|x| x.take(&x.get_next_best_action(100, 10, DT).0, DT));
+    if scene.save(&"scenes/simple_done.toml".to_string()) {
+        println!("saved");
+    } else {
+        println!("error during saving")
     }
-    println!("after: {}", agents[0]);
 }
