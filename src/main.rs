@@ -4,16 +4,13 @@ mod scene;
 mod agent;
 
 fn main() {
-    let mut scene = match Scene::load(&"scenes/simple.toml".to_string()) {
+    let filename: String = "scenes/simple.toml".to_string();
+    let mut scene = match Scene::load(&filename) {
         Some(s) => s,
-        None => panic!()
+        None => panic!("Couldn't load {}", filename)
     };
 
     scene.run();
 
-    if scene.save(&"scenes/simple_done.toml".to_string()) {
-        println!("saved");
-    } else {
-        println!("error during saving")
-    }
+    scene.save(&"scenes/simple_done.toml".to_string());
 }
