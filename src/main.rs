@@ -1,13 +1,8 @@
-use crate::scene::Scene;
-
-mod scene;
-mod agent;
-mod diff_drive;
-mod accel_diff_drive;
+use mpc::scene;
 
 fn main() {
     let filename: String = "scenes/simple.toml".to_string();
-    let mut scene = match Scene::load(&filename) {
+    let mut scene = match scene::Scene::load(&filename) {
         Some(s) => s,
         None => panic!("Couldn't load {}", filename)
     };

@@ -11,3 +11,11 @@ rand = "*" # replace * by the latest version of the crate.
 toml = "*"
 serde = "*"
 serde_derive = "*"
+dipstick = "*"
+
+[dev-dependencies]
+criterion = "0.3"
+
+[[bench]]
+name = "diff_drive_benchmark"
+harness = false
