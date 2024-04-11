@@ -19,3 +19,7 @@ criterion = "0.3"
 [[bench]]
 name = "diff_drive_benchmark"
 harness = false
+
+[[bench]]
+name = "accel_diff_drive_benchmark"
+harness = false

@@ -6,8 +6,8 @@ use crate::agent::Agent;
 
 #[derive(Serialize, Deserialize)]
 pub struct AccelDiffDriveAgent {
-    state: Vector5<f64>, // x, y, theta, l, w
-    goal: Vector3<f64>,  // x, y, theta
+    pub state: Vector5<f64>, // x, y, theta, l, w
+    pub goal: Vector3<f64>,  // x, y, theta
 }
 
 impl AccelDiffDriveAgent {
